@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЯнаАрт — Фотограф</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --burgundy: #6B1E2E;
+            --burgundy-light: #8B2E3E;
+            --dark-gray: #2C2C2C;
+            --medium-gray: #4A4A4A;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark-gray);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* ШАПКА */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 25px 50px;
+            z-index: 1000;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+
+        header.scrolled {
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            padding: 15px 50px;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--white);
+            transition: color 0.4s;
+            letter-spacing: 2px;
+        }
+
+        header.scrolled .logo {
+            color: var(--burgundy);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        header.scrolled nav a {
+            color: var(--dark-gray);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--burgundy);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--burgundy);
+        }
+
+        /* ГЛАВНЫЙ БЛОК - 4 ФОТО НА ВЕСЬ ЭКРАН */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        /* МЕСТО ПОД ФОТО 1 */
+        .hero-slide:nth-child(1) {
+            background: linear-gradient(rgba(44,44,44,0.3), rgba(44,44,44,0.3)), 
+                        url('photo1.jpg') center/cover;
+        }
+
+        /* МЕСТО ПОД ФОТО 2 */
+        .hero-slide:nth-child(2) {
+            background: linear-gradient(rgba(44,44,44,0.3), rgba(44,44,44,0.3)), 
+                        url('photo2.jpg') center/cover;
+        }
+
+        /* МЕСТО ПОД ФОТО 3 */
+        .hero-slide:nth-child(3) {
+            background: linear-gradient(rgba(44,44,44,0.3), rgba(44,44,44,0.3)), 
+                        url('photo3.jpg') center/cover;
+        }
+
+        /* МЕСТО ПОД ФОТО 4 */
+        .hero-slide:nth-child(4) {
+            background: linear-gradient(rgba(44,44,44,0.3), rgba(44,44,44,0.3)), 
+                        url('photo4.jpg') center/cover;
+
+        }
+
+        .hero-content {
+            position: absolute;
+            bottom: 80px;
+            left: 80px;
+            text-align: left;
+            color: var(--white);
+            z-index: 10;
+            width: 60%;
+            max-width: 700px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 34px;
+            font-weight: 300;
+            font-style: normal;
+            margin-bottom: 20px;                
+            line-height: 1.2;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px
+        }
+
+        .hero-content .subtitle {
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            font-weight: 300;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 18px 45px;
+            border: 2px solid var(--white);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            background: transparent;
+        }
+
+        .hero-btn:hover {
+            background: var(--white);
+            color: var(--dark-gray);
+        }
+
+        /* О ФОТОГРАФЕ - МЕСТО ПОД ФОТО */
+        .about {
+            padding: 120px 50px;
+            background: var(--white);
+        }
+
+        .about-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 42px;
+            margin-bottom: 30px;
+            color: var(--burgundy);
+        }
+
+        .about-text p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--medium-gray);
+            margin-bottom: 20px;
+        }
+
+        /* МЕСТО ПОД ФОТО ФОТОГРАФА */
+        .about-photo {
+            height: 600px;
+            background: var(--light-gray);
+            background-image: url('about-photo.jpg');
+            /* Замени 'about-photo.jpg' на своё фото */
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+
+        /* ВИДЫ ФОТОСЕССИЙ - МЕСТО ПОД ФОТО */
+        .services {
+            padding: 120px 50px;
+            background: var(--light-gray);
+        }
+
+        .services-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .services-slider {
+            height: 700px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .services-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .services-slide.active {
+            opacity: 1;
+        }
+
+        /* МЕСТО ПОД ФОТО СЛАЙД 1 */
+        .services-slide:nth-child(1) {
+            background: url('service1.jpg') center/cover;
+            /* Замени 'service1.jpg' на своё фото */
+        }
+
+        /* МЕСТО ПОД ФОТО СЛАЙД 2 */
+        .services-slide:nth-child(2) {
+            background: url('service2.jpg') center/cover;
+            /* Замени 'service2.jpg' на своё фото */
+        }
+
+        /* МЕСТО ПОД ФОТО СЛАЙД 3 */
+        .services-slide:nth-child(3) {
+            background: url('service3.jpg') center/cover;
+            /* Замени 'service3.jpg' на своё фото */
+        }
+
+        .services-content {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        .services-block h3 {
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: var(--burgundy);
+        }
+
+        .services-list {
+            list-style: none;
+        }
+
+        .services-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(107,30,46,0.2);
+            font-size: 16px;
+            color: var(--dark-gray);
+            transition: padding-left 0.3s;
+        }
+
+        .services-list li:hover {
+            padding-left: 10px;
+            color: var(--burgundy);
+        }
+
+        .services-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* ОТЗЫВЫ */
+        .reviews {
+            padding: 120px 50px;
+            background: var(--white);
+        }
+
+        .reviews-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .reviews h2 {
+            font-size: 42px;
+            margin-bottom: 60px;
+            color: var(--burgundy);
+        }
+
+        .reviews-slider {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .review-card {
+            display: none;
+            padding: 40px;
+            animation: fadeIn 0.5s;
+        }
+
+        .review-card.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .review-text {
+            font-size: 20px;
+            font-style: italic;
+            line-height: 1.8;
+            color: var(--medium-gray);
+            margin-bottom: 30px;
+        }
+
+        .review-author {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--burgundy);
+            letter-spacing: 1px;
+        }
+
+        .reviews-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .reviews-nav button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--burgundy);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .reviews-nav button.active {
+            background: var(--burgundy);
+        }
+        .review-photo {
+            width: 66%;
+            height: 450px;
+            margin: 0 auto 40px auto;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .review-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+       /* КОНТАКТЫ */
+        .contacts {
+            padding: 20px 15px;
+            background: var(--dark-gray);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .contacts-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contacts h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+
+        .contacts-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .contacts-icons a {
+            width: 35px;
+            height: 35px;
+            border: 2px solid var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .contacts-icons a:hover {
+            background: var(--burgundy);
+            border-color: var(--burgundy);
+            transform: translateY(-2px);
+        }
+
+        .contacts-icons svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--white);
+        }
+
+        .contacts-phone {
+            font-size: 15px;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .contacts-city {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.7);
+        }
+
+       
+
+        /* АДАПТИВ */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px;
+            }
+
+            header.scrolled {
+                padding: 15px 20px;
+            }
+
+            .header-inner {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            nav a {
+                font-size: 11px;
+            }
+            .hero-content {
+                bottom: 40px;
+                left: 30px;
+                width: 85%;
+            }
+            .hero-content h1 {
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 1.2;
+
+            }
+            .hero-content .subtitle {
+                font-size: 11px;
+                letter-spacing: 2px;
+            }
+            .hero-btn {
+                padding: 14px;
+                font-size: 11px;
+            }
+            .about, .services, .reviews, .contacts {
+                padding: 80px 20px;
+            }
+
+            .about-inner, .services-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-photo {
+                height: 400px;
+            }
+
+            .services-slider {
+                height: 400px;
+            }
+            .review-photo {
+                width: 90%;
+                height: 350px;
+                border-radius: 20px;
+            }
+
+            .review-text {
+                font-size: 16px;
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header id="header">
+        <div class="header-inner">
+            <div class="logo">ЯнаАрт</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#services">Виды фотосессий</a></li>
+                    <li><a href="#reviews">Отзывы</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ГЛАВНЫЙ БЛОК С 4 ФОТО -->
+    <section id="home" class="hero">
+        <div class="hero-slider">
+            <div class="hero-slide active"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Искренние фотоистории о людях, чувствах и моментах, которые больше никогда не повторятся</h1>
+            <p class="subtitle">Персональные, семейные, парные и свадебные фотосессии</p>
+            <a href="#contacts" class="hero-btn">Написать фотографу</a>
+        </div>
+    </section>
+
+    <!-- О ФОТОГРАФЕ -->
+    <section class="about">
+        <div class="about-inner">
+            <div class="about-text">
+                <h2>Обо мне</h2>
+                <p>Меня зовут Яна, и я верю, что каждый человек уникален. Моя задача — поймать эту уникальность в кадре, сохранить ваши эмоции и моменты, которые делают вас собой.</p>
+                <p>Уже более 5 лет я создаю фотографии, которые рассказывают истории. Мои работы — это не просто картинки, это живые воспоминания, к которым хочется возвращаться снова и снова.</p>
+                <p>Я работаю в Сочи и готова выехать в любую точку мира, чтобы запечатлеть вашу историю.</p>
+            </div>
+            <div class="about-photo"></div>
+        </div>
+    </section>
+
+    <!-- ВИДЫ ФОТОСЕССИЙ -->
+    <section id="services" class="services">
+        <div class="services-inner">
+            <div class="services-slider">
+                <div class="services-slide active"></div>
+                <div class="services-slide"></div>
+                <div class="services-slide"></div>
+            </div>
+            <div class="services-content">
+                <div class="services-block">
+                    <h3>Что я снимаю</h3>
+                    <ul class="services-list">
+                        <li>Персональные фотосессии</li>
+                        <li>Семейные фотосессии</li>
+                        <li>Парные фотосессии</li>
+                        <li>Свадебные фотосессии</li>
+                        <li>Love story</li>
+                        <li>Фотосессии для беременных</li>
+                    </ul>
+                </div>
+                <div class="services-block">
+                    <h3>Приходя на съемку ко мне, Вы получите:</h3>
+                    <ul class="services-list">
+                        <li>Профессиональную консультацию по подготовке к съемке</li>
+                        <li>Помощь с выбором локации и образа</li>
+                        <li>Комфортную атмосферу на съемке</li>
+                        <li>100+ обработанных фотографий</li>
+                        <li>Готовые фото в течение 2 недель</li>
+                        <li>Все исходники в высоком разрешении</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ОТЗЫВЫ -->
+<section id="reviews" class="reviews">
+    <div class="reviews-inner">
+        <h2>Отзывы</h2>
+        <div class="reviews-slider">
+            <!-- Отзыв 1 -->
+            <div class="review-card active">
+                <div class="review-photo">
+                    <img src="review-photo1.jpg" alt="Пример работы">
+                    <!-- Замени 'review-photo1.jpg' на своё фото -->
+                </div>
+                <p class="review-text">"Яна — невероятный фотограф! Она создала такую атмосферу, что мы забыли о камере. Фотографии получились живыми и настоящими. Это именно то, что мы хотели!"</p>
+                <p class="review-author">— Анна и Дмитрий</p>
+            </div>
+            <!-- Отзыв 2 -->
+            <div class="review-card">
+                <div class="review-photo">
+                    <img src="review-photo2.jpg" alt="Пример работы">
+                    <!-- Замени 'review-photo2.jpg' на своё фото -->
+                </div>
+                <p class="review-text">"Спасибо за чудесные фотографии! Яна умеет поймать самые искренние моменты. Теперь у меня есть память."</p>
+                <p class="review-author">— Мария</p>
+            </div>
+            <!-- Отзыв 3 -->
+            <div class="review-card">
+                <div class="review-photo">
+                    <img src="review-photo3.jpg" alt="Пример работы">
+                    <!-- Замени 'review-photo3.jpg' на своё фото -->
+                </div>
+                <p class="review-text">"Профессионализм высшего уровня! Яна помогла нам расслабиться и быть собой. Фотографии превзошли все ожидания. Рекомендую от всего сердца!"</p>
+                <p class="review-author">— Елена и Сергей</p>
+            </div>
+        </div>
+        <div class="reviews-nav">
+            <button class="active" onclick="showReview(0)"></button>
+            <button onclick="showReview(1)"></button>
+            <button onclick="showReview(2)"></button>
+        </div>
+    </div>
+</section>
+
+    <!-- КОНТАКТЫ -->
+    <section id="contacts" class="contacts">
+        <div class="contacts-inner">
+            <h2>Контакты</h2>
+            <div class="contacts-icons">
+                <a href="https://t.me/your_telegram" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.94z"/></svg>
+                </a>
+                <a href="https://vk.com/your_vk" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M12.785 16.241s.288-.032.436-.194c.136-.148.132-.427.132-.427s-.02-1.304.587-1.496c.598-.189 1.367 1.259 2.182 1.814.617.42 1.085.328 1.085.328l2.177-.03s1.14-.071.599-.97c-.044-.073-.314-.661-1.617-1.869-1.364-1.263-1.182-1.059.462-3.246.999-1.332 1.398-2.146 1.273-2.494-.12-.332-.856-.244-.856-.244l-2.45.015s-.182-.025-.317.056c-.131.079-.216.263-.216.263s-.387 1.03-.903 1.904c-1.088 1.848-1.524 1.946-1.702 1.832-.413-.266-.31-1.07-.31-1.638 0-1.778.27-2.518-.524-2.71-.263-.064-.456-.106-1.128-.113-.863-.009-1.595.003-2.009.205-.275.135-.487.436-.358.454.16.021.522.098.714.361.248.341.239 1.109.239 1.109s.143 2.099-.333 2.358c-.327.178-.776-.185-1.741-1.848-.493-.851-.865-1.793-.865-1.793s-.072-.176-.2-.271c-.155-.115-.372-.151-.372-.151l-2.327.015s-.35.01-.478.162c-.114.135-.009.413-.009.413s1.817 4.244 3.874 6.383c1.886 1.963 4.028 1.834 4.028 1.834h.97z"/></svg>
+                </a>
+            </div>
+            <p class="contacts-phone">+7 (999) 123-45-67</p>
+            <p class="contacts-city">Сочи</p>
+        </div>
+    </section>
+
+    <script>
+        // Шапка при скролле
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Слайдер главного блока (4 фото)
+        let currentHeroSlide = 0;
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        
+        setInterval(() => {
+            heroSlides[currentHeroSlide].classList.remove('active');
+            currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+            heroSlides[currentHeroSlide].classList.add('active');
+        }, 5000);
+
+        // Слайдер видов фотосессий
+        let currentServicesSlide = 0;
+        const servicesSlides = document.querySelectorAll('.services-slide');
+        
+        setInterval(() => {
+            servicesSlides[currentServicesSlide].classList.remove('active');
+            currentServicesSlide = (currentServicesSlide + 1) % servicesSlides.length;
+            servicesSlides[currentServicesSlide].classList.add('active');
+        }, 4000);
+
+        // Отзывы
+        function showReview(index) {
+            const reviews = document.querySelectorAll('.review-card');
+            const buttons = document.querySelectorAll('.reviews-nav button');
+            
+            reviews.forEach(review => review.classList.remove('active'));
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            reviews[index].classList.add('active');
+            buttons[index].classList.add('active');
+        }
+
+        // Автоматическая смена отзывов
+        let currentReview = 0;
+        setInterval(() => {
+            currentReview = (currentReview + 1) % 3;
+            showReview(currentReview);
+        }, 6000);
+
+        // Плавный скролл
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
