@@ -501,28 +501,33 @@
         /* АДАПТИВ */
         @media (max-width: 768px) {
             header {
-                padding: 20px;
+                padding: 15px 20px;
             }
 
             header.scrolled {
-                padding: 15px 20px;
+                padding: 12px 20px;
             }
 
             .header-inner {
                 flex-direction: row;
                 justify-content: space-between;
+                align-items: center;
             }
 
             .logo {
-                font-size: 22px;
+                font-size: 20px;
+                order: 1;
             }
-
+            nav {
+                order: 2;
+            }
             nav ul {
-                gap: 15px;
+                gap: 10px;
+                flex-wrap: nowrap;
             }
-
             nav a {
-                font-size: 11px;
+                font-size: 10px;
+                padding: 5px;
             }
             .hero-content {
                 bottom: 40px;
@@ -560,14 +565,16 @@
                 height: 400px;
             }
             .review-photo {
-                width: 90%;
-                height: 350px;
-                border-radius: 20px;
+                width: 85%;
+                height: 400px;
+                margin: 0 auto 40px auto;
+                border-radius: 15px;
             }
 
             .review-text {
                 font-size: 16px;
-                padding: 0 10px;
+                padding: 0 20px;
+                line-height: 1.6;
             }
         }
     </style>
